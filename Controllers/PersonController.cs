@@ -26,27 +26,35 @@ namespace VueJS_AspNetCoreWebAPI.Controllers
             return persons;
         }
 
-        [HttpGet("id")]
+        [HttpGet]
+        [Route("{id:int}")]
         public Person GetById(int id)
         {
             return _repository.GetById(id);
         }
-
 
         [HttpPost]
         public string CreatePerson(string name, string organization)
         {
             Person person = new Person(name, organization);
             _repository.Add(person);
-            return $"Объект создан id={person.Id}, Name = {person.Name}, Org = {person.Organization}";
+            return $"Object has created id={person.Id}, Name = {person.Name}, Org = {person.Organization}";
         }
+        [HttpPut]
+        public string UpdatePerson(int Id, string newName, string newOrganization)
+        {
+            Person personToUpdate = new Person(newName,newOrganization,Id);
+            _repository.Update(personToUpdate);
+            return
+                $"Object has updated id={personToUpdate.Id}, Name = {personToUpdate.Name}, Org = {personToUpdate.Organization}";
 
-
+        }
+        
         [HttpDelete]
         public string DeletePerson(int id)
         {
             _repository.Delete(id);
-            return $"Объект удален id={id}";
+            return $"Object has removed id={id}";
         }
 
     }

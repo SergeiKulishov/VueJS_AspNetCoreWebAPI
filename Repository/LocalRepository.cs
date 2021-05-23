@@ -14,7 +14,7 @@ namespace VueJS_AspNetCoreWebAPI.Repository
             {
                 db.Persons.Add(person);
                 db.SaveChanges();
-                Console.WriteLine("Объект успешно добавлен!");
+                Console.WriteLine("Object has added!");
             }
         }
 
@@ -26,7 +26,7 @@ namespace VueJS_AspNetCoreWebAPI.Repository
                 db.Persons.Remove(personToDelete);
                 db.SaveChanges();
             }
-            Console.WriteLine("Объект успешно удален!");
+            Console.WriteLine("Object has removed!");
         }
 
         public void Update(Person person)
@@ -36,7 +36,7 @@ namespace VueJS_AspNetCoreWebAPI.Repository
                 db.Persons.Update(person);
                 db.SaveChanges();
             }
-            Console.WriteLine("Объект успешно обновлен!");
+            Console.WriteLine("Object has updated!");
 
         }
 

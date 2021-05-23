@@ -49,7 +49,7 @@ namespace VueJS_AspNetCoreWebAPI
             }
 
             app.UseRouting();
-            app.UseSpaStaticFiles();
+            //app.UseSpaStaticFiles();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -63,12 +63,12 @@ namespace VueJS_AspNetCoreWebAPI
                     spa.Options.SourcePath = "ClientApp";
                 else
                     spa.Options.SourcePath = "dist";
-
+            
                 if (env.IsDevelopment())
                 {
                     spa.UseVueCli(npmScript: "serve");
                 }
-
+            
             });
         }
     }

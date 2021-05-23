@@ -4,8 +4,9 @@ namespace VueJS_AspNetCoreWebAPI
 {
     public class Person
     {
-        public Person(string name,string organization)
+        public Person(string name,string organization, int id = 0)
         {
+            Id = id;
             Name = name;
             Organization = organization;
         }
