@@ -43,6 +43,7 @@ namespace VueJS_AspNetCoreWebAPI.Controllers
         }
         
         [HttpPut]
+        [Route("{id:int}")]
         public string UpdatePerson(int id, string newName, string[] newOrganization)
         {
             Person personToUpdate = new Person(newName,newOrganization,id);
@@ -51,6 +52,7 @@ namespace VueJS_AspNetCoreWebAPI.Controllers
                 $"Object has updated id={personToUpdate.Id}, Name = {personToUpdate.Name}, Org = {personToUpdate.OrganizationsToString()}"; 
         } 
         [HttpDelete]
+        [Route("{id:int}")]
         public string DeletePerson(int id)
         {
             _repository.Delete(id);
