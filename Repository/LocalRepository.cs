@@ -18,11 +18,11 @@ namespace VueJS_AspNetCoreWebAPI.Repository
             }
         }
 
-        public void Delete(int Id)
+        public void Delete(int id)
         {
             using(ApplicationContext db = new ApplicationContext())
             {
-                Person personToDelete = db.Persons.Find(Id);
+                Person personToDelete = db.Persons.Find(id);
                 db.Persons.Remove(personToDelete);
                 db.SaveChanges();
             }
@@ -43,25 +43,23 @@ namespace VueJS_AspNetCoreWebAPI.Repository
         public IEnumerable<Person> GetAll()
         {
             List<Person> allPersons;
-
             using (ApplicationContext db = new ApplicationContext())
             {
                 allPersons = db.Persons.ToList();
             }
+
             return allPersons;
         }
 
-        public Person GetById(int PersonId)
+        public Person GetById(int personId)
         {
-            List<Person> allPersons;
-
+            Person personToGet;
             using (ApplicationContext db = new ApplicationContext())
             {
-                allPersons = db.Persons.ToList();
+                personToGet = db.Persons.Find(personId);
             }
-            Person searchResult = allPersons.Find(p => p.Id == PersonId);
 
-            return searchResult;
+            return personToGet;
         }
     }
 }

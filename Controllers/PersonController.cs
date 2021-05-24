@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using VueJS_AspNetCoreWebAPI.Repository;
 
@@ -34,22 +35,21 @@ namespace VueJS_AspNetCoreWebAPI.Controllers
         }
 
         [HttpPost]
-        public string CreatePerson(string name, string organization)
+        public string CreatePerson(string name, string[] organization)
         {
             Person person = new Person(name, organization);
             _repository.Add(person);
-            return $"Object has created id={person.Id}, Name = {person.Name}, Org = {person.Organization}";
-        }
-        [HttpPut]
-        public string UpdatePerson(int Id, string newName, string newOrganization)
-        {
-            Person personToUpdate = new Person(newName,newOrganization,Id);
-            _repository.Update(personToUpdate);
-            return
-                $"Object has updated id={personToUpdate.Id}, Name = {personToUpdate.Name}, Org = {personToUpdate.Organization}";
-
+            return $"Object has created id={person.Id}, Name = {person.Name}, Org = {person.OrganizationsToString()}";
         }
         
+        [HttpPut]
+        public string UpdatePerson(int id, string newName, string[] newOrganization)
+        {
+            Person personToUpdate = new Person(newName,newOrganization,id);
+            _repository.Update(personToUpdate);
+            return
+                $"Object has updated id={personToUpdate.Id}, Name = {personToUpdate.Name}, Org = {personToUpdate.OrganizationsToString()}"; 
+        } 
         [HttpDelete]
         public string DeletePerson(int id)
         {

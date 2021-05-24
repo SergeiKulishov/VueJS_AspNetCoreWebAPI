@@ -12,10 +12,10 @@ namespace VueJS_AspNetCoreWebAPI.Repository
 
         public void Update(Person person);
 
-        public void Delete(int Id);
+        public void Delete(int id);
 
         public IEnumerable<Person> GetAll();
 
-        public Person GetById(int PersonId);
+        public Person GetById(int personId);
     }
 }
