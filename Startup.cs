@@ -28,7 +28,7 @@ namespace VueJS_AspNetCoreWebAPI
         {
             services.AddTransient<IPersonRepository, LocalRepository>();
             services.AddControllers();
-            services.AddCors(); // добавляем сервисы CORS
+            services.AddCors(); 
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp";

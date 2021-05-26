@@ -1,0 +1,43 @@
+.control-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    border: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: transparent;
+    opacity: .7;
+    transition: all .15s ease;
+}
+
+.icon:hover {
+    opacity: 1;
+}
+
+.icon:last-child {
+    margin-right: 0;
+}
+
+.icon-edit {
+    background-image: url("../../assets/edit-solid.svg");
+}
+
+.icon-remove {
+    background-image: url("../../assets/trash-alt-solid.svg");
+}
+
+.icon-add {
+    background-image: url("../../assets/icon-add.svg");
+}
+
+.spinner-box {
+    text-align: center;
+}

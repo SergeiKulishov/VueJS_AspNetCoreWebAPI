@@ -20,8 +20,7 @@ namespace VueJS_AspNetCoreWebAPI
 
         public string OrganizationsToString()
         {
-            string listOfOrgs;
-            listOfOrgs = Organization.Aggregate("", (current, org) => current + (org + ","));
+            var listOfOrgs = Organization.Aggregate("", (current, org) => current + (org + ","));
             listOfOrgs = listOfOrgs.Remove(listOfOrgs.Length - 1);
             return listOfOrgs;
         }
