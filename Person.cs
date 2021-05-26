@@ -5,22 +5,22 @@ namespace VueJS_AspNetCoreWebAPI
 {
     public class Person
     {
-        public Person(string name, List<string> organization, int id = 0)
+        public Person(string name, List<string> organizations, int id = 0)
         {
             Id = id;
             Name = name;
-            Organization = organization;
+            Organizations = organizations;
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public List<string> Organization { get; set; }
+        public List<string> Organizations { get; set; }
 
         public string OrganizationsToString()
         {
-            var listOfOrgs = Organization.Aggregate("", (current, org) => current + (org + ","));
+            var listOfOrgs = Organizations.Aggregate("", (current, org) => current + (org + ","));
             listOfOrgs = listOfOrgs.Remove(listOfOrgs.Length - 1);
             return listOfOrgs;
         }

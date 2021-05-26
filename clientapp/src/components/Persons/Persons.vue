@@ -15,7 +15,7 @@
             <td>{{ person.id }}</td>
             <td class="mdc-data-table__cell">{{ person.name }}</td>
             <td class="mdc-data-table__cell">
-            <span v-for="org in person.organization" :key="org.id">
+            <span v-for="org in person.organizations" :key="org.id">
               {{ org }},
             </span>
             </td>
@@ -79,8 +79,9 @@
             editPersonHandler: function (id) {
                 console.log(`editPersonHandler(${id})`)
                 axios.put(`http://localhost:5000/person/${id}`, {
+                    
                     name: JSON.stringify(this.personName),
-                    // organizations: []
+                    organizations: ["Ser","ret"]
                 })
                     .then(res => {
                         localStorage.setItem('selectedPerson', JSON.stringify(res.data))

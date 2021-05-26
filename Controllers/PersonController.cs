@@ -44,8 +44,10 @@ namespace VueJS_AspNetCoreWebAPI.Controllers
         }
         
         [HttpPut]
-        public string UpdatePerson(Person personToUpdate)
+        [Route("{id:int}")]
+        public string UpdatePerson(int id, PersonData newdata)
         {
+            Person personToUpdate = new Person(newdata.Name, newdata.Organizations, id);
             _repository.Update(personToUpdate);
             return
                 $"Object has updated id={personToUpdate.Id}, Name = {personToUpdate.Name}, Org = {personToUpdate.OrganizationsToString()}"; 

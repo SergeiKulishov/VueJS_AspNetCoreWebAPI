@@ -48,8 +48,8 @@
             editPerson: function (id) {
                 console.log(`editPerson(${id})`)
                 axios.put(`http://localhost:5000/person/${id}`, {
-                    "name": 'Test',
-                    "organizations": ["string"]
+                    "name": 'RAbotaet ebana v rot',
+                    "organizations": ["RET","GS"]
                 })
                     .then(res => {
                         localStorage.setItem('selectedPerson', JSON.stringify(res.data))
