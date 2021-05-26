@@ -14,7 +14,7 @@ namespace VueJS_AspNetCoreWebAPI.Repository
             {
                 db.Persons.Add(person);
                 db.SaveChanges();
-                Console.WriteLine("Object has added!");
+                Console.WriteLine($"Object has added with ID = {person.Id}!");
             }
         }
 
@@ -26,7 +26,7 @@ namespace VueJS_AspNetCoreWebAPI.Repository
                 db.Persons.Remove(personToDelete);
                 db.SaveChanges();
             }
-            Console.WriteLine("Object has removed!");
+            Console.WriteLine($"Object with ID = {id} has removed!");
         }
 
         public void Update(Person person)
@@ -36,7 +36,7 @@ namespace VueJS_AspNetCoreWebAPI.Repository
                 db.Persons.Update(person);
                 db.SaveChanges();
             }
-            Console.WriteLine("Object has updated!");
+            Console.WriteLine($"Object with ID = {person.Id} has updated!");
 
         }
 

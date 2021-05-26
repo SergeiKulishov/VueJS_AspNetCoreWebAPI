@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,19 +35,17 @@ namespace VueJS_AspNetCoreWebAPI.Controllers
             return _repository.GetById(id);
         }
 
-        [HttpPost]
-        public string CreatePerson(string name, string[] organization)
+        [HttpPost] 
+        public string CreatePerson(PersonData data)
         {
-            Person person = new Person(name, organization);
+            Person person = new Person(data.Name,data.Organizations);
             _repository.Add(person);
             return $"Object has created id={person.Id}, Name = {person.Name}, Org = {person.OrganizationsToString()}";
         }
         
         [HttpPut]
-        [Route("{id:int}")]
-        public string UpdatePerson(int id, string newName, string[] newOrganization)
+        public string UpdatePerson(Person personToUpdate)
         {
-            Person personToUpdate = new Person(newName,newOrganization,id);
             _repository.Update(personToUpdate);
             return
                 $"Object has updated id={personToUpdate.Id}, Name = {personToUpdate.Name}, Org = {personToUpdate.OrganizationsToString()}"; 
