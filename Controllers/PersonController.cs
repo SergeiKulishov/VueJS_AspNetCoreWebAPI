@@ -38,19 +38,38 @@ namespace VueJS_AspNetCoreWebAPI.Controllers
         [HttpPost] 
         public string CreatePerson(PersonData data)
         {
-            Person person = new Person(data.Name,data.Organizations);
-            _repository.Add(person);
-            return $"Object has created id={person.Id}, Name = {person.Name}, Org = {person.OrganizationsToString()}";
+            try
+            {
+                Person person = new Person(data.Name,data.Organizations);
+                _repository.Add(person);
+                return $"Object has created id={person.Id}, Name = {person.Name}, Org = {person.OrganizationsToString()}";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return "Something went wrong with creating";
+            }
+            
         }
         
         [HttpPut]
         [Route("{id:int}")]
         public string UpdatePerson(int id, PersonData newdata)
         {
-            Person personToUpdate = new Person(newdata.Name, newdata.Organizations, id);
-            _repository.Update(personToUpdate);
-            return
-                $"Object has updated id={personToUpdate.Id}, Name = {personToUpdate.Name}, Org = {personToUpdate.OrganizationsToString()}"; 
+            try
+            {
+                Person personToUpdate = new Person(newdata.Name, newdata.Organizations, id);
+                _repository.Update(personToUpdate);
+                return
+                    $"Object has updated id={personToUpdate.Id}, Name = {personToUpdate.Name}, Org = {personToUpdate.OrganizationsToString()}"; 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return "Something went wrong with updating";
+
+            }
+            
         } 
         [HttpDelete]
         [Route("{id:int}")]

@@ -51,7 +51,7 @@ namespace VueJS_AspNetCoreWebAPI
 
             app.UseRouting();
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            //app.UseSpaStaticFiles();
+            app.UseSpaStaticFiles();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
