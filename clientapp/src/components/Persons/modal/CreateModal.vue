@@ -8,15 +8,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3 row">
-                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <label for="createName" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" v-model="personName" class="form-control" id="name">
+                            <input type="text" v-model="personName" class="form-control" id="createName">
                         </div>
                     </div>
                     <div class="d-grid">
                         <label class="col-sm-2 col-form-label">Organization</label>
                         <div>
-                            <Multiselect @createPerson="onUpdate"/>
+                            <Multiselect @multiselect="onUpdateOrg"/>
                         </div>
                     </div>
                 </div>
@@ -40,28 +40,30 @@
         },
         data() {
             return {
-                personName: 'Tolik',
-                personOrg: ['Google', 'Tesla'],
+                personName: this.personName,
+                personOrg: [],
             };
         },
         methods: {
             createPerson: function () {
                 console.log("createPerson()")
-                console.log(this.personName)
-                console.log(this.personOrg)
-                axios.post(`http://localhost:5000/person`, {
-                    name: 'Tolik',
-                    organizations: ['Google', 'Tesla']
-                })
-                    .then(res => {
-                        console.log(res.data)
-                        this.personName = ''
-                        this.personOrg = []
+                console.log("this.personName:", this.personName);
+                console.log("this.personOrg:", JSON.stringify(this.personOrg));
+                if (this.personName !== '') {
+                    axios.post(`http://localhost:5000/person`, {
+                        name: this.personName,
+                        organizations: this.personOrg
                     })
+                        .then(() => {
+                            this.$emit('onCreatePerson')
+                            this.personName = ''
+                            this.personOrg = []
+                        })
+                        .catch(() => this.$emit('onCreatePerson'))
+                }
             },
-            onUpdate(data) {
-                console.log('onUpdate()')
-                this.personOrg = data;
+            onUpdateOrg(data) {
+                this.personOrg = data.data;
             }
         }
     }

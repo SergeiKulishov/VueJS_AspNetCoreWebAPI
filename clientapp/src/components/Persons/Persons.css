@@ -15,6 +15,7 @@
     background-position: center center;
     background-color: transparent;
     opacity: .7;
+    cursor: pointer;
     transition: all .15s ease;
 }
 
@@ -27,14 +28,16 @@
 }
 
 .icon-edit {
-    background-image: url("../../assets/edit-solid.svg");
+    background-image: url("../../assets/icon-edit.svg");
 }
 
 .icon-remove {
-    background-image: url("../../assets/trash-alt-solid.svg");
+    background-image: url("../../assets/icon-remove.svg");
 }
 
 .icon-add {
+    width: 26px;
+    height: 26px;
     background-image: url("../../assets/icon-add.svg");
 }
 

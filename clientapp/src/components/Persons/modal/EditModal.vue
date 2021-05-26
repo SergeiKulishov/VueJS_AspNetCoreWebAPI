@@ -8,20 +8,22 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3 row">
-                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <label for="editName" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" v-model="personName" class="form-control" id="name">
+                            <input type="text" v-model="personName" class="form-control" id="editName">
                         </div>
                     </div>
                     <div class="d-grid">
                         <label class="col-sm-2 col-form-label">Organization</label>
                         <div>
-                            <Multiselect @multiselect="onUpdate"/>
+                            <Multiselect @multiselect="onUpdateOrg"
+                                         :dataOrg="personOrg"/>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button data-remodal-action="confirm" v-on:click="editPerson(1)" class="remodal-confirm">Save
+                    <button data-remodal-action="confirm" v-on:click="editPerson(selectedPersonId)"
+                            class="remodal-confirm">Save
                     </button>
                 </div>
             </div>
@@ -40,31 +42,39 @@
         },
         data() {
             return {
-                personName: '',
+                personName: "",
                 personOrg: [],
+                selectedPersonId: null,
             };
+        },
+        props: {
+            selectedPersonEditingData: Object
         },
         methods: {
             editPerson: function (id) {
-                console.log(`editPerson(${id})`)
+                console.log(`editPerson(${id})`);
                 axios.put(`http://localhost:5000/person/${id}`, {
-                    "name": 'RAbotaet ebana v rot',
-                    "organizations": ["RET","GS"]
+                    name: this.personName,
+                    organizations: this.personOrg
                 })
                     .then(res => {
+                        this.$emit('onEditPerson')
                         localStorage.setItem('selectedPerson', JSON.stringify(res.data))
                         console.log(res.data)
                     })
+                    .catch(() => this.$emit('onEditPerson'))
             },
-            onUpdate(data) {
-                console.log('onUpdate()')
-                this.personOrg = data;
-                console.log(this.personOrg)
+            onUpdateOrg(data) {
+                this.personOrg = data.data;
             }
+        },
+        updated() {
+            this.selectedPersonId = this.selectedPersonEditingData.id
+            if (this.personName === '' && this.personOrg.length === 0) {
+                this.personName = this.selectedPersonEditingData.name
+                this.personOrg = this.selectedPersonEditingData.organizations
+            }
+            // console.log(this.personOrg)
         }
     }
 </script>
-
-<style scoped>
-
-</style>

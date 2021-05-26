@@ -6,7 +6,7 @@
             <th scope="col">Name</th>
             <th scope="col">Organisation</th>
             <th class="text-center">
-                <button class="icon icon-add" data-remodal-target="createModal"/>
+                <div class="icon icon-add" data-remodal-target="createModal"/>
             </th>
         </tr>
         </thead>
@@ -16,7 +16,7 @@
             <td class="mdc-data-table__cell">{{ person.name }}</td>
             <td class="mdc-data-table__cell">
             <span v-for="org in person.organizations" :key="org.id">
-              {{ org }},
+              {{ org }} |
             </span>
             </td>
             <td class="control-panel">
@@ -29,8 +29,8 @@
         <Spinner/>
         </tbody>
     </table>
-    <CreateModal @createPerson="onUpdate"/>
-    <EditModal @editPerson="onUpdate"/>
+    <CreateModal @onCreatePerson="onUpdate"/>
+    <EditModal :selectedPersonEditingData="selectedPersonEditingData" @onEditPerson="onUpdate"/>
 </template>
 
 <script>
@@ -46,27 +46,20 @@
             return {
                 persons: [],
                 personName: '',
-                personOrg: []
+                personOrg: [],
+                selectedPersonEditingData: {}
             };
         },
         methods: {
             selectPerson: function (id) {
-                console.log(`editHandler(${id})`)
-                axios.get(`http://localhost:5000/Person/${id}`)
+                console.log(`editHandler(${id})`);
+                axios.get(`http://localhost:5000/person/${id}`)
                     .then(res => {
                         localStorage.setItem('selectedPerson', JSON.stringify(res.data))
+                        this.selectedPersonEditingData = res.data;
                         this.personName = res.data.title;
                         console.log(res.data)
                     })
-            },
-            createPersonHandler: function () {
-                console.log('createPerson()');
-                console.log(this.personName);
-                axios.post('http://localhost:5000/person', {
-                    name: 'Test',
-                    organization: ['test1', 'test2']
-                })
-                    .then(res => console.log(res.data))
             },
             fetchPersons: function () {
                 console.log('fetchPersons()')
@@ -74,18 +67,6 @@
                     .then(res => {
                         console.log(res.data)
                         this.persons = res.data
-                    })
-            },
-            editPersonHandler: function (id) {
-                console.log(`editPersonHandler(${id})`)
-                axios.put(`http://localhost:5000/person/${id}`, {
-                    
-                    name: JSON.stringify(this.personName),
-                    organizations: ["Ser","ret"]
-                })
-                    .then(res => {
-                        localStorage.setItem('selectedPerson', JSON.stringify(res.data))
-                        console.log(res.data)
                     })
             },
             removePerson: function (id) {
@@ -104,14 +85,15 @@
                     })
             },
             onUpdate(data) {
-                console.log(data)
+                console.log("onUpdate()")
                 this.personName = data;
-                this.personOrg = data;
+                this.personOrg = data
+                this.fetchPersons()
             }
         },
-        created: function () {
+        mounted: function () {
             this.fetchPersons()
-        }
+        },
     }
 </script>
 

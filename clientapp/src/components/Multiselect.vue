@@ -5,7 +5,9 @@
                 placeholder="Select your organizations"
                 mode="tags"
                 @select="multiselect"
+                @deselect="multiselect"
                 :options="options"
+                :required="true"
         />
     </div>
 </template>
@@ -28,12 +30,19 @@
                 ],
             }
         },
+        props: {
+            dataOrg: Array,
+        },
         methods: {
             multiselect() {
-                console.log("multiselect()")
                 this.$emit('multiselect', {
                     data: this.value
                 })
+            }
+        },
+        updated() {
+            if(this.value === null) {
+                this.value = this.dataOrg
             }
         }
     }
