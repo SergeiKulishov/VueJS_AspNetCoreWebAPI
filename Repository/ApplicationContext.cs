@@ -18,7 +18,7 @@ namespace VueJS_AspNetCoreWebAPI.Repository
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=personsdb;Trusted_Connection=True;");
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=personsdb;Username=postgres;");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=personsdb;Username=postgres;Password=greatsteve");
 
         }
     }
