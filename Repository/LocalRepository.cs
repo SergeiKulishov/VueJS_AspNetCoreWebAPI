@@ -8,7 +8,7 @@ namespace VueJS_AspNetCoreWebAPI.Repository
 {
     public class LocalRepository : IPersonRepository
     {
-        public void Add(Person person)
+        public void AddAsync(Person person)
         {
             using (ApplicationContext db = new ApplicationContext())
             {

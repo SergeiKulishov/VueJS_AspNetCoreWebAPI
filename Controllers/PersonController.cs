@@ -41,7 +41,7 @@ namespace VueJS_AspNetCoreWebAPI.Controllers
             try
             {
                 Person person = new Person(data.Name,data.Organizations);
-                _repository.Add(person);
+                _repository.AddAsync(person);
                 return $"Object has created id={person.Id}, Name = {person.Name}, Org = {person.OrganizationsToString()}";
             }
             catch (Exception e)

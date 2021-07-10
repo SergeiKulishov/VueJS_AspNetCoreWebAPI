@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VueCliMiddleware;
 using VueJS_AspNetCoreWebAPI.Repository;
+using VueJS_AspNetCoreWebAPI.Repository.ADORepository;
 
 namespace VueJS_AspNetCoreWebAPI
 {
@@ -26,7 +27,7 @@ namespace VueJS_AspNetCoreWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IPersonRepository, LocalRepository>();
+            services.AddTransient<IPersonRepository, ADORepository>();
             services.AddControllers();
             services.AddCors(); 
             services.AddSpaStaticFiles(configuration =>

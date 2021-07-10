@@ -12,6 +12,13 @@ namespace VueJS_AspNetCoreWebAPI
             Organizations = organizations;
         }
 
+        public Person(string name, string organizations, int id = 0)
+        {
+            Id = id;
+            Name = name;
+            Organizations = organizations.Split(",").ToList();
+        }
+
         public int Id { get; set; }
 
         public string Name { get; set; }

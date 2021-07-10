@@ -8,7 +8,7 @@ namespace VueJS_AspNetCoreWebAPI.Repository
 {
     public interface IPersonRepository
     {
-        public void Add(Person person);
+        public void AddAsync(Person person);
 
         public void Update(Person person);
 
